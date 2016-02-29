@@ -1,0 +1,4 @@
+UNIX_101;Introduction to Java;2;0;OPEN
+UNIX_113;Introduction to Python;2;0;OPEN
+UNIX_413;R Programming;1;0;OPEN
+UNIX_450;Advance Object Oriented Programming;2;0;OPEN
