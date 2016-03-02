@@ -1,9 +1,12 @@
-import java.util.Comparator;
-
 /**
- * Created by Shahp on 2/23/2016.
+ * Author: TEAM C: [PREMAL SHAH, HAMID ASGARI, MITA JAGAD, LISA GRADY]
+ *Class: I&C SCI_X460.10 (WINTER 2016/REG 00216/SEC 1) (Java Programming I)
+ *Instructor: KESHA SMITH
+ *FINAL TEAM PROJECT: REGISTRATION CONSOLE
+ *Email: Shah.Prem85@gmail.com
+ * Created by TEam C on 2/23/2016.
  */
-public class Course {
+class Course {
 
     private String id;
     private String name;
@@ -77,26 +80,23 @@ public class Course {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("");
-        sb.append("[").append(id).append("]");
-        sb.append(" ").append(name.toUpperCase()).append(":");
-        sb.append(" [OFFERING: ").append(cdate).append("]");
-        sb.append(" [CAP: ").append(capacity).append("]");
-        sb.append(" [ENROLLED: ").append(enrolled).append("]");
-        sb.append(" STATUS: [").append(status).append("]");
-        return sb.toString();
+        return "" + "[" + id + "]" +
+                " " + name.toUpperCase() + ":" +
+                " [OFFERING: " + cdate + "]" +
+                " [CAP: " + capacity + "]" +
+                " [ENROLLED: " + enrolled + "]" +
+                " STATUS: [" + status + "]";
     }
 
 
     public String report() {
-        final StringBuilder sb = new StringBuilder("");
-        sb.append(id).append(";");
-        sb.append(name).append(";");
-        sb.append(cdate).append(";");
-        sb.append(capacity).append(";");
-        sb.append(enrolled).append(";");
-        sb.append(status).append("");
+        String sb = "" + id + ";" +
+                name + ";" +
+                cdate + ";" +
+                capacity + ";" +
+                enrolled + ";" +
+                status + "";
         // to do
-        return sb.toString();
+        return sb;
     }
 }
