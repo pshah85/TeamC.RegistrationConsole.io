@@ -2,9 +2,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Shahp on 2/23/2016.
+ * Author: TEAM C: [PREMAL SHAH, HAMID ASGARI, MITA JAGAD, LISA GRADY]
+ *Class: I&C SCI_X460.10 (WINTER 2016/REG 00216/SEC 1) (Java Programming I)
+ *Instructor: KESHA SMITH
+ *FINAL TEAM PROJECT: REGISTRATION CONSOLE
+ *Email: Shah.Prem85@gmail.com
+ * Created by TEam C on 2/23/2016.
  */
-public class User {
+class User {
 
     private String firstName;
     private String lastName;
@@ -86,13 +91,11 @@ public class User {
     }
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("");
-        sb.append(" ").append(firstName);
-        sb.append(" ").append(lastName);
-        sb.append(" ").append(userId);
-        sb.append(" ").append(password);
-        sb.append(" ").append(regsiteredCoursesIds);
-        return sb.toString();
+        return "" + " " + firstName +
+                " " + lastName +
+                " " + userId +
+                " " + password +
+                " " + regsiteredCoursesIds;
     }
 
     public String report() {
