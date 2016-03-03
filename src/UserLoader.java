@@ -15,34 +15,36 @@ import java.util.Scanner;
  * Created by TEam C on 2/23/2016.
  */
 public class UserLoader {
-
-    private static String userFileName;
     private static Scanner userInput = new Scanner(System.in);
-
+    private static String newUserFileName;
     public static String getUserFileName() {
-        return userFileName;
+        return newUserFileName;
     }
 
-    public static Map<String, User> Loadusers() {
-
-        Map<String, User> defaultusers = new HashMap<>();
-        System.out.println("users.txt File Path: ");
-        userFileName = userInput.nextLine();
-        File defaultUserFile = new File(userFileName);
+    public static Map<String, User> loadUsers(String userFileName) {
+        boolean run = true;
+        Map<String, User> users = new HashMap<>();
         // try with resources automatically closes readers
-        try (BufferedReader br = new BufferedReader(new FileReader(defaultUserFile))) {
-            // read the first line from the text file
-            String line;
-            // loop until all lines are read
-            while ((line = br.readLine()) != null) {
-                User user = new User(line);
-                defaultusers.put(user.getUserId(), user);
+        do {
+            File defaultUserFile = new File(userFileName);
+            try (BufferedReader br = new BufferedReader(new FileReader(defaultUserFile))) {
+                // read the first line from the text file
+                String line;
+                // loop until all lines are read
+                while ((line = br.readLine()) != null) {
+                    User user = new User(line);
+                    users.put(user.getUserId(), user);
+                }
+                newUserFileName = userFileName;
+                run = false;
+                break;
+            } catch (IOException e) {
+                // Print out the exception that occurred
+                System.out.println("Unable to read file" + "\nError: " + e.getMessage());
+                System.out.println("Enter Valid File Path:");
+                userFileName = userInput.nextLine();
             }
-        } catch (IOException e) {
-            // Print out the exception that occurred
-            System.out.println("Unable to read " + defaultUserFile + ": " + e.getMessage());
-        }
-        return defaultusers;
+        }while(true);
+        return users;
     }
-
 }
