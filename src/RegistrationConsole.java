@@ -1,4 +1,5 @@
 import java.io.BufferedWriter;
+import java.io.Console;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
@@ -18,7 +19,8 @@ class RegistrationConsole {
     private static Map<String, Course> courses = new HashMap<>();
     private static String currentUserId;
     private static int nameLength;
-
+    private static String userFileName;
+    private static String courseFileName;
     public static void mainMenu() {
         System.out.println( "----------------------------------------------------------------------------");
         System.out.println( "|Author(s): TEAM C: [PREMAL SHAH, HAMID ASGARI, MITA JAGAD, LISA GRADY]    |\n"+
@@ -28,11 +30,17 @@ class RegistrationConsole {
                             "|Email: Shah.Prem85@gmail.com                                              |");
         System.out.println( "----------------------------------------------------------------------------\n\n");
         boolean run = true;
+        System.out.println("Following Application requires access to users.txt & courses.txt files\n");
+        System.out.println("Please Enter Full PATH for both files below:");
+        System.out.print("[Project Dir: ");
+        System.out.println(System.getProperty("user.dir") + "] ");
+        System.out.println("Enter Valid 'users.txt' File Path:");
+        userFileName = userInput.nextLine();
+        users = UserLoader.loadUsers(userFileName);
+        System.out.println("Enter Valid 'courses.txt' File Path:");
+        courseFileName = userInput.nextLine();
+        courses = CourseLoader.loadCourses(courseFileName);
 
-        System.out.println("Following Application will need access to users.txt & courses.txt files");
-        System.out.println("Please Enter Full path for both files below:");
-        users = UserLoader.Loadusers();
-        courses = CourseLoader.loadCourses();
         int userSelection;
         do {
             try {
@@ -52,8 +60,6 @@ class RegistrationConsole {
                         registerNewUser();
                         break;
                     case 2:                     //Current User Login Display RegistrationConsole
-                        users.clear();
-                        users = UserLoader.Loadusers();
                         login();
                         currentUserMenu();
                         break;
@@ -115,7 +121,7 @@ class RegistrationConsole {
                 for(int i = 0; i < (nameLength-(course.getId().length()+course.getName().length())); i++){
                     System.out.print(" ");
                 }
-                System.out.print("["+ course.getCdate() + "] "+"CAPACITY: [" + course.getCapacity()+"] ENROLLED: ["+course.getEnrolled() + "] "+ " STATUS: [ " +course.getStatus().toUpperCase() +" ]");
+                System.out.print("["+ course.getCdate() + "] "+"CAP: [" + course.getCapacity()+"] ENROLLED: ["+course.getEnrolled() + "] "+ " STATUS: [" +course.getStatus().toUpperCase() +"]");
                 System.out.println("");
             }
         printoutline();
@@ -146,7 +152,7 @@ class RegistrationConsole {
                 for(int i = 0; i < (nameLength-(sortedCourses.get(courseId).getId().length()+sortedCourses.get(courseId).getName().length())); i++){
                     System.out.print(" ");
                 }
-                System.out.print("["+ sortedCourses.get(courseId).getCdate() + "] "+"CAPACITY: [" + sortedCourses.get(courseId).getCapacity()+"] ENROLLED: ["+sortedCourses.get(courseId).getEnrolled() + "] "+ " STATUS: [ " +sortedCourses.get(courseId).getStatus().toUpperCase() +" ]");
+                System.out.print("["+ sortedCourses.get(courseId).getCdate() + "] "+"CAPACITY: [" + sortedCourses.get(courseId).getCapacity()+"] ENROLLED: ["+sortedCourses.get(courseId).getEnrolled() + "] "+ " STATUS: [" +sortedCourses.get(courseId).getStatus().toUpperCase() +"]");
                 System.out.println("");
             } else if((users.get(currentUserId).getRegisteredCourseIds().isEmpty()) || (users.get(currentUserId).getRegisteredCourseIds().equals(""))) {
                 System.out.println("Your are not enrolled in any courses");
@@ -155,7 +161,7 @@ class RegistrationConsole {
         printoutline();
     }
     public static void registerNewUser() {        // New User Registration RegistrationConsole
-
+        Console console = System.console();
         boolean run = true;
         do {
             System.out.println("New User Profile \n"+
@@ -173,7 +179,7 @@ class RegistrationConsole {
                 users.put(user.getUserId(), user);
                 System.out.println("User successfully created.");
                 System.out.println("Saving new user in to database");
-                try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("resources/users.txt"))) {
+                try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(UserLoader.getUserFileName()))) {
                     for(User u : users.values()) {
                         bufferedWriter.write(u.report());
                         bufferedWriter.newLine();
@@ -253,7 +259,7 @@ class RegistrationConsole {
                 for(int i = 0; i < (nameLength-(course.getId().length()+course.getName().length())); i++){
                     System.out.print(" ");
                 }
-                System.out.print("["+ course.getCdate() + "] "+"CAPACITY: [" + course.getCapacity()+"] ENROLLED: ["+course.getEnrolled() + "] "+ " STATUS: [ " +course.getStatus().toUpperCase() +" ]");
+                System.out.print("["+ course.getCdate() + "] "+"CAP: [" + course.getCapacity()+"] ENROLLED: ["+course.getEnrolled() + "] "+ " STATUS: [" +course.getStatus().toUpperCase() +"]");
                 System.out.println("");
             }
         }
