@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.Map;
+import java.util.Scanner;
 
 /**
  * Author: TEAM C: [PREMAL SHAH, HAMID ASGARI, MITA JAGAD, LISA GRADY]
@@ -15,10 +16,13 @@ import java.util.Map;
  */
 
 class CourseLoader {
-
+    private static String courseFileName;
+    private static Scanner userInput = new Scanner(System.in);
     public static Map<String, Course> loadCourses() {
         Map<String, Course> courses = new HashMap<>();
-        File coursesFile = new File("resources/courses.txt");
+        System.out.println("courses.txt File Path:");
+        courseFileName = userInput.nextLine();
+        File coursesFile = new File(courseFileName);
         // Using try with resources automatically closes the readers
         try (BufferedReader br = new BufferedReader(new FileReader(coursesFile))) {
             // read the first line from the text file
