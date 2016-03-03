@@ -10,7 +10,7 @@ import java.util.*;
  *Email: Shah.Prem85@gmail.com
  * Created by TEam C on 2/23/2016.
  */
-public class RegistrationConsole {
+class RegistrationConsole {
 
     private static Scanner userInput = new Scanner(System.in);
 
@@ -18,6 +18,7 @@ public class RegistrationConsole {
     private static Map<String, Course> courses = new HashMap<>();
     private static String currentUserId;
     private static int nameLength;
+
     public static void mainMenu() {
         System.out.println( "----------------------------------------------------------------------------");
         System.out.println( "|Author(s): TEAM C: [PREMAL SHAH, HAMID ASGARI, MITA JAGAD, LISA GRADY]    |\n"+
@@ -27,6 +28,9 @@ public class RegistrationConsole {
                             "|Email: Shah.Prem85@gmail.com                                              |");
         System.out.println( "----------------------------------------------------------------------------\n\n");
         boolean run = true;
+
+        System.out.println("Following Application will need access to users.txt & courses.txt files");
+        System.out.println("Please Enter Full path for both files below:");
         users = UserLoader.Loadusers();
         courses = CourseLoader.loadCourses();
         int userSelection;
@@ -78,7 +82,7 @@ public class RegistrationConsole {
 
     private static void saveToFile() {
         System.out.println("Now recording registration data to user's file");
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("resources/courses.txt"))) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(CourseLoader.getCourseFileName()))) {
             for(Course course : courses.values()) {
                 bufferedWriter.write(course.report());
                 bufferedWriter.newLine();
@@ -86,7 +90,7 @@ public class RegistrationConsole {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("resources/users.txt"))) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(UserLoader.getUserFileName()))) {
             for(User user : users.values()) {
                 bufferedWriter.write(user.report());
                 bufferedWriter.newLine();
@@ -189,7 +193,7 @@ public class RegistrationConsole {
     }
     public static void currentUserMenu(){          // User Personal Space
         boolean run = true;
-        int userSelection = 0;
+        int userSelection;
 
         do {
             System.out.println("\n" + users.get(currentUserId).getFullName() + "'s Personal Space" + "\n" +
@@ -275,7 +279,6 @@ public class RegistrationConsole {
                 users.get(currentUserId).addCourse(courseId);
                 courses.get(courseId).registeredStudent();
                 System.out.println("You have successfully registered for " + courseId);
-                run = false;
             }
             // add logic to exit and invalid message
 
