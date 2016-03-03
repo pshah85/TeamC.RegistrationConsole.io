@@ -17,6 +17,11 @@ import java.util.Scanner;
 
 class CourseLoader {
     private static String courseFileName;
+
+    public static String getCourseFileName() {
+        return courseFileName;
+    }
+
     private static Scanner userInput = new Scanner(System.in);
     public static Map<String, Course> loadCourses() {
         Map<String, Course> courses = new HashMap<>();
