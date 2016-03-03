@@ -14,34 +14,38 @@ import java.util.Scanner;
  *Email: Shah.Prem85@gmail.com
  * Created by TEam C on 2/23/2016.
  */
-
 class CourseLoader {
-    private static String courseFileName;
-
+    private static Scanner userInput = new Scanner(System.in);
+    private static String newCourseFileName;
     public static String getCourseFileName() {
-        return courseFileName;
+        return newCourseFileName;
     }
 
-    private static Scanner userInput = new Scanner(System.in);
-    public static Map<String, Course> loadCourses() {
+    public static Map<String, Course> loadCourses(String courseFileName) {
+        boolean run = true;
         Map<String, Course> courses = new HashMap<>();
-        System.out.println("courses.txt File Path:");
-        courseFileName = userInput.nextLine();
-        File coursesFile = new File(courseFileName);
-        // Using try with resources automatically closes the readers
-        try (BufferedReader br = new BufferedReader(new FileReader(coursesFile))) {
-            // read the first line from the text file
-            String line;
-            // loop until all lines are read
-            while ((line = br.readLine()) != null) {
-                Course course = new Course(line);
-                courses.put(course.getId(), course);
-            }
-            // close file stream
-        } catch (IOException e) {
-            // Print out the exception that occurred
-            System.out.println("Unable to read " + coursesFile + ": " + e.getMessage());
-        }
+        do {
+            File defaultCourseFile = new File(courseFileName);
+                // Using try with resources automatically closes the readers
+                try (BufferedReader br = new BufferedReader(new FileReader(defaultCourseFile))) {
+                    // read the first line from the text file
+                    String line;
+                    // loop until all lines are read
+                    while ((line = br.readLine()) != null) {
+                        Course course = new Course(line);
+                        courses.put(course.getId(), course);
+                    }
+                    newCourseFileName = courseFileName;
+                    run = false;
+                    break;
+                    // close file stream
+                } catch (IOException e) {
+                    // Print out the exception that occurred
+                    System.out.println("Unable to read File" + "\nError: " + e.getMessage());
+                    System.out.println("Enter Valid File Path:");
+                    courseFileName = userInput.nextLine();
+                }
+        } while (true);
         return courses;
     }
 
