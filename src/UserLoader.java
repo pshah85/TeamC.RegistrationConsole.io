@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 /**
  * Author: TEAM C: [PREMAL SHAH, HAMID ASGARI, MITA JAGAD, LISA GRADY]
@@ -15,10 +16,19 @@ import java.util.Map;
  */
 public class UserLoader {
 
+    private static String userFileName;
+    private static Scanner userInput = new Scanner(System.in);
+
+    public static String getUserFileName() {
+        return userFileName;
+    }
+
     public static Map<String, User> Loadusers() {
 
         Map<String, User> defaultusers = new HashMap<>();
-        File defaultUserFile = new File("resources/users.txt");
+        System.out.println("users.txt File Path: ");
+        userFileName = userInput.nextLine();
+        File defaultUserFile = new File(userFileName);
         // try with resources automatically closes readers
         try (BufferedReader br = new BufferedReader(new FileReader(defaultUserFile))) {
             // read the first line from the text file
