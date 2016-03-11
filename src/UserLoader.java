@@ -7,12 +7,12 @@ import java.util.Map;
 import java.util.Scanner;
 
 /**
- * Author: TEAM C: [PREMAL SHAH, HAMID ASGARI, MITA JAGAD, LISA GRADY]
+ * Authors: TEAM C: [PREMAL SHAH, HAMID ASGARI, MITA JAGAD, LISA GRADY]
  *Class: I&C SCI_X460.10 (WINTER 2016/REG 00216/SEC 1) (Java Programming I)
  *Instructor: KESHA SMITH
  *FINAL TEAM PROJECT: REGISTRATION CONSOLE
  *Email: Shah.Prem85@gmail.com
- * Created by TEam C on 2/23/2016.
+ * Created by Team C on 2/23/2016.
  */
 public class UserLoader {
     private static Scanner userInput = new Scanner(System.in);
